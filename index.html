@@ -25,19 +25,28 @@
             <div id="messageError" class="error"></div>
         </div>
         <div>
-            <button type="submit">Submit</button>
+            <button type="submit" id="submitButton">Submit</button>
         </div>
         <div id="successMessage" class="success-message" style="display: none;">Formularen blev sendt med succes!</div>
     </form>
 
     <script src="/assets/js/script.js"></script>
-
     <script>
+        // Function to check internet connection
+        function checkInternetConnection() {
+            fetch('https://www.google.com', { mode: 'no-cors' })
+                .then(function(response) {
+                    if (!response.ok) {
+                        alert("Du er i øjeblikket offline. Tjek venligst din internetforbindelse.");
+                    }
+                })
+                .catch(function(error) {
+                    alert("Du er i øjeblikket offline. Tjek venligst din internetforbindelse.");
+                });
+        }
+
         window.addEventListener('load', function () {
-            if (!navigator.onLine) {
-                // Hvis der ikke er nogen internetforbindelse, vis en advarsel
-                alert("Du er i øjeblikket offline. Tjek venligst din internetforbindelse.");
-            }
+            checkInternetConnection();
         });
 
         window.addEventListener('online', function () {
