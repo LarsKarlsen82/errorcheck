@@ -32,41 +32,21 @@
 
     <script src="/assets/js/script.js"></script>
     <script>
-        // Function to check internet connection
-        function checkInternetConnection() {
-            fetch('https://www.google.com', { mode: 'no-cors' })
-                .then(function(response) {
-                    if (!response.ok) {
-                        alert("Du er i øjeblikket offline. Tjek venligst din internetforbindelse.");
-                    }
-                })
-                .catch(function(error) {
-                    alert("Du er i øjeblikket offline. Tjek venligst din internetforbindelse.");
-                });
-        }
+fetch('https://google.com', {
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    mode: 'no-cors',
+})
+.then((response) => {
+    if (response.ok) {
+        console.log("Internet connected");
+    } else {
+        console.log("No internet connection");
+    }
+})
+.catch((error) => {
+    console.error("No internet connection", error);
+});
 
-        window.addEventListener('load', function () {
-            checkInternetConnection();
-        });
-
-        window.addEventListener('online', function () {
-            // Når forbindelsen genoprettes, vis en bekræftelse
-            alert("Du er nu online igen!");
-        });
-
-        window.addEventListener('offline', function () {
-            // Når forbindelsen mistes, vis en besked
-            alert("Du er i øjeblikket offline. Tjek venligst din internetforbindelse.");
-        });
-
-        // Add an event listener to the form submit event
-        document.getElementById('contactForm').addEventListener('submit', function (event) {
-            if (!navigator.onLine) {
-                // Prevent form submission if there is no internet connection
-                event.preventDefault();
-                alert("Du kan ikke sende formularen, da du er offline. Tjek venligst din internetforbindelse.");
-            }
-        });
     </script>
 </body>
 </html>
