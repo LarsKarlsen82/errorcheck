@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Error Display</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <form id="contactForm">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <div id="nameError" class="error"></div>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <div id="emailError" class="error"></div>
+        </div>
+        <div>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea>
+            <div id="messageError" class="error"></div>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+        <div id="successMessage" class="success-message" style="display: none;">Formularen blev sendt med succes!</div>
+    </form>
+
+    <script src="/assets/js/script.js"></script>
+
+    <script>
+        window.addEventListener('load', function () {
+            if (!navigator.onLine) {
+                // Hvis der ikke er nogen internetforbindelse, vis en advarsel
+                alert("Du er i øjeblikket offline. Tjek venligst din internetforbindelse.");
+            }
+        });
+
+        window.addEventListener('online', function () {
+            // Når forbindelsen genoprettes, vis en bekræftelse
+            alert("Du er nu online igen!");
+        });
+
+        window.addEventListener('offline', function () {
+            // Når forbindelsen mistes, vis en besked
+            alert("Du er i øjeblikket offline. Tjek venligst din internetforbindelse.");
+        });
+
+        // Add an event listener to the form submit event
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            if (!navigator.onLine) {
+                // Prevent form submission if there is no internet connection
+                event.preventDefault();
+                alert("Du kan ikke sende formularen, da du er offline. Tjek venligst din internetforbindelse.");
+            }
+        });
+    </script>
+</body>
+</html>
